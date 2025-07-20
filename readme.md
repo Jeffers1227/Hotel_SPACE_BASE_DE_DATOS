@@ -39,9 +39,5 @@ Este proyecto fue desarrollado como parte de un curso universitario para adminis
 - Editor como VS Code 
 - instalar dependencias como npm intall -y, node server.js
 
-## 🚀 ¿Cómo ejecutar el proyecto?
 
-1. Clona este repositorio:
 
-```bash
-git clone https://github.com/tu-usuario/nombre-del-repo.git
