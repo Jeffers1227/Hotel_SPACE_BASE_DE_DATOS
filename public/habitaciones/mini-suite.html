@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reserva Mini Suite - Hotel Space</title>
+  <link rel="stylesheet" href="/css/reservar.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="/img/logo_space.png" alt="Logo Hotel">
+    </div>
+    <nav>
+      <a href="/bienvenido.html">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#">Habitaciones</a>
+      <a href="#">Productos</a>
+      <a href="/comentarios.html">Recomendaciones</a>
+    </nav>
+    <div class="header-right">
+      <div class="cart">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <div class="usuario">
+        <span id="usuarioNombre" class="usuario-nombre">Usuario</span>
+        <div class="dropdown">
+          <a href="#" id="cerrarSesion">Cerrar sesión</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO -->
+   <h1 id="nombreHabitacion">Mini Suite</h1>
+  <main class="reserva-container">
+    <div class="reserva-info">
+      <img src="/img/mini.suite.webp" alt="Mini Suite">
+        <p class="motivacion">
+        Disfruta de una experiencia única en nuestra Mini Suite. <br>
+        ¡Haz tu reserva hoy y vive el confort que mereces!
+        </p>
+
+    </div>
+
+    <div class="reserva-form">
+      <h2>Reservar Mini Suite</h2>
+
+      <label>Fecha:</label>
+      <input type="date" id="fecha" required>
+
+      <label>Hora:</label>
+      <input type="time" id="hora" required>
+
+      <label>Productos adicionales:</label>
+      <div id="productos"></div>
+
+      <label>Número de tarjeta (simulada):</label>
+      <input type="text" id="tarjeta" placeholder="1234 5678 9012 3456">
+
+      <button onclick="reservar()">Reservar</button>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <img src="/img/logo_space.png" alt="Logo Footer">
+    </div>
+    <div class="footer-title">Hotel Space</div>
+    <div class="footer-contact">
+      <p>+51 977644045</p>
+      <p>UTP, Salón C0403, Santa Clara, Ate</p>
+      <p>space.reservas@gmail.com</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    const usuarioNombre = document.getElementById('usuarioNombre');
+
+    if (usuario) {
+      usuarioNombre.textContent = `${usuario.nombre} (${usuario.rol})`;
+    } else {
+      usuarioNombre.textContent = "Invitado";
+    }
+
+    document.getElementById('cerrarSesion').addEventListener('click', function (e) {
+      e.preventDefault();
+      localStorage.removeItem('usuario');
+      window.location.href = '/login.html';
+    });
+
+    async function cargarProductos() {
+      try {
+        const res = await fetch('/api/productos');
+        const productos = await res.json();
+        const contenedor = document.getElementById('productos');
+
+        productos.forEach(prod => {
+          const item = document.createElement('div');
+          item.innerHTML = `
+            <input type="checkbox" value="${prod.id}" id="prod-${prod.id}" />
+            <label for="prod-${prod.id}">${prod.nombre} - S/${prod.precio}</label>
+          `;
+          contenedor.appendChild(item);
+        });
+      } catch (err) {
+        console.error('❌ Error cargando productos:', err);
+        alert('Error al cargar productos');
+      }
+    }
+
+    async function reservar() {
+  const fecha = document.getElementById('fecha').value;
+  const hora = document.getElementById('hora').value;
+  const tarjeta = document.getElementById('tarjeta').value;
+
+  if (!usuario || !usuario.nombre) {
+    alert('Debes iniciar sesión para reservar');
+    return;
+  }
+
+  const nombre = usuario.nombre;
+  const habitacion = document.getElementById('nombreHabitacion').textContent.trim(); // 🟢 aquí tomamos el nombre del h1
+  const productos = Array.from(document.querySelectorAll('#productos input:checked'))
+    .map(el => parseInt(el.value));
+
+  const fechaHora = `${fecha} ${hora}:00`; // MySQL DATETIME necesita el formato completo
+
+  const body = {
+    nombre,
+    habitacion,
+    fecha: fechaHora,
+    productos
+  };
+
+  try {
+    const res = await fetch('/api/reservas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+
+    const result = await res.json();
+
+    if (result.mensaje) {
+      alert('✅ Reserva realizada con éxito');
+      window.location.href = '/bienvenido.html';
+    } else {
+      alert('❌ Error al reservar');
+    }
+  } catch (err) {
+    console.error('❌ Error al enviar reserva:', err);
+    alert('Error de conexión');
+  }
+}
+
+
+    cargarProductos();
+  </script>
+</body>
+</html>

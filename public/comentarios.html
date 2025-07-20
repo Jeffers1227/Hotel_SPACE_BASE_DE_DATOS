@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comentarios - Hotel Space</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* HEADER */
+    header {
+      background-color: #322620;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      color: white;
+    }
+
+    .logo img {
+      height: 60px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cart {
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .usuario {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .usuario-nombre {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 25px;
+      right: 0;
+      background-color: white;
+      color: black;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: black;
+    }
+
+    .dropdown a:hover {
+      background-color: #eee;
+    }
+
+    .usuario:hover .dropdown {
+      display: block;
+    }
+
+    /* SECCIÓN DE COMENTARIOS */
+    .comentarios {
+      padding: 50px 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .comentarios h2 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .comentarios p {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    form textarea,
+    form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    form button {
+      background-color: #322620;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #4b382d;
+    }
+
+    #mensaje {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #322620;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo img {
+      height: 60px;
+    }
+
+    .footer-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .footer-contact {
+      text-align: right;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+      }
+
+      .footer-contact {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="https://spacekrim.ru/upload/iblock/a9a/a9a5c62cc609d05ff2b6ea5e575880ca.png" alt="Logo Hotel">
+    </div>
+    <nav>
+      <a href="bienvenido.html">Inicio</a>
+      <a href="#">Nosotros</a>
+      <a href="#">Habitaciones</a>
+      <a href="#">Miembro VIP</a>
+      <a href="#">Productos</a>
+      <a href="comentarios.html">Recomendaciones</a>
+    </nav>
+    <div class="header-right">
+      <div class="cart">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <div class="usuario">
+        <span id="usuarioNombre" class="usuario-nombre">Usuario</span>
+        <div class="dropdown">
+          <a href="#" id="cerrarSesion">Cerrar sesión</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECCIÓN COMENTARIOS -->
+  <section class="comentarios">
+    <h2>Dejar Comentario</h2>
+    <p>Bienvenido: <span id="nombreUsuario"></span></p>
+
+    <form id="formComentario">
+      <textarea name="comentario" placeholder="Tu comentario" required></textarea>
+      <input type="text" name="peticion" placeholder="Petición especial (opcional)">
+      <button type="submit">Enviar</button>
+    </form>
+
+    <p id="mensaje"></p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <img src="https://spacekrim.ru/upload/iblock/a9a/a9a5c62cc609d05ff2b6ea5e575880ca.png" alt="Logo Footer">
+    </div>
+    <div class="footer-title">Hotel Space</div>
+    <div class="footer-contact">
+      <p>+51 977644045</p>
+      <p>Calle UTP, Salón B0805, Santa Clara, Ate</p>
+      <p>space.reservas@gmail.com</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE USUARIO Y ENVÍO -->
+  <script>
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    const usuarioNombre = document.getElementById('usuarioNombre');
+    const nombreUsuario = document.getElementById('nombreUsuario');
+
+    if (usuario) {
+      usuarioNombre.textContent = `${usuario.nombre} (${usuario.rol})`;
+      nombreUsuario.textContent = usuario.nombre;
+    } else {
+      usuarioNombre.textContent = 'Invitado';
+      nombreUsuario.textContent = 'Invitado';
+    }
+
+  document.getElementById('formComentario').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const comentario = e.target.comentario.value;
+  const peticion = e.target.peticion.value;
+  const usuario = JSON.parse(localStorage.getItem('usuario')) || {};
+  const nombre = usuario.nombre || 'Invitado';
+  const correo = usuario.correo || 'sin-correo@ejemplo.com';
+
+  try {
+    const res = await fetch('/api/comentarios/guardar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        usuario: nombre,
+        correo,
+        comentario,
+        peticion
+      })
+    });
+
+    const mensaje = await res.text();
+    document.getElementById('mensaje').textContent = mensaje;
+    e.target.reset();
+
+  } catch (err) {
+    document.getElementById('mensaje').textContent = '❌ Error al enviar comentario';
+  }
+});
+
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!-- public/productos.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Productos</title>
+</head>
+<body>
+  <h1>Lista de Productos</h1>
+  <ul id="lista-productos"></ul>
+
+  <script>
+    fetch('/api/productos')
+      .then(res => res.json())
+      .then(data => {
+        const lista = document.getElementById('lista-productos');
+        data.forEach(producto => {
+          const li = document.createElement('li');
+          li.textContent = `${producto.nombre} - S/ ${producto.precio}`;
+          lista.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>

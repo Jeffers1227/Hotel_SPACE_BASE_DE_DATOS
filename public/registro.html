@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Usuario</title>
+  <link rel="stylesheet" href="css/registro.css">
+</head>
+<body>
+
+  <div class="contenedor">
+    <div class="imagen"></div>
+
+    <div class="formulario">
+      <h2>Registrarse</h2>
+      <form id="formRegistro">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" required>
+
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" id="contraseña" required>
+
+        <label for="rol">Rol:</label>
+        <select id="rol">
+          <option value="cliente" selected>Cliente</option>
+          <option value="admin">Administrador</option>
+        </select>
+
+        <button type="submit">Registrar</button>
+        
+        <a href="login.html">iniciar sesion</a>
+      </form>
+
+      <div id="mensaje"></div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('formRegistro');
+    const mensaje = document.getElementById('mensaje');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const datos = {
+        nombre: document.getElementById('nombre').value,
+        correo: document.getElementById('correo').value,
+        contraseña: document.getElementById('contraseña').value,
+        rol: document.getElementById('rol').value
+      };
+
+      try {
+        const res = await fetch('/api/auth/registro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+        });
+
+        const data = await res.json();
+        mensaje.textContent = data.mensaje || 'Registro realizado con éxito';
+        mensaje.style.color = 'green';
+
+      } catch (err) {
+        mensaje.textContent = 'Error al registrar el usuario';
+        mensaje.style.color = 'red';
+      }
+    });
+  </script>
+
+</body>
+</html>

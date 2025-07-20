@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel de Administración</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f3f6fc;
+      padding: 40px;
+      color: #333;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    a {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      background-color: #3498db;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    a:hover {
+      background-color: #2980b9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px auto;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+      padding: 15px;
+      font-weight: bold;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    tr:hover {
+      background-color: #f1f9ff;
+    }
+
+    .btn {
+      padding: 8px 12px;
+      margin: 2px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-edit {
+      background-color: #27ae60;
+      color: white;
+    }
+
+    .btn-edit:hover {
+      background-color: #1e8449;
+    }
+
+    .btn-delete {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background-color: #c0392b;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+
+      table {
+        font-size: 14px;
+      }
+
+      .btn {
+        font-size: 12px;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bienvenido, Administrador</h1>
+  <div style="text-align: center;">
+    <a href="bienvenido.html">Volver al inicio</a>
+  </div>
+
+  <h2>Gestión de Productos</h2>
+  <table id="tablaProductos">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Datos cargados desde backend -->
+    </tbody>
+  </table>
+
+  <script>
+    async function cargarProductos() {
+      try {
+        const res = await fetch('/api/productos');
+        const productos = await res.json();
+
+        const tabla = document.querySelector('#tablaProductos tbody');
+        tabla.innerHTML = '';
+
+        productos.forEach(p => {
+          tabla.innerHTML += `
+            <tr>
+              <td>${p.id}</td>
+              <td>${p.nombre}</td>
+              <td>S/ ${parseFloat(p.precio).toFixed(2)}</td>
+              <td>
+                <button class="btn btn-edit" onclick="editarProducto(${p.id}, '${p.nombre}', ${p.precio})">Editar</button>
+                <button class="btn btn-delete" onclick="eliminarProducto(${p.id})">Eliminar</button>
+              </td>
+            </tr>
+          `;
+        });
+      } catch (err) {
+        console.error('Error al cargar productos:', err);
+      }
+    }
+
+    async function agregarProducto() {
+      const nombre = document.getElementById('nombre').value;
+      const precio = parseFloat(document.getElementById('precio').value);
+
+      if (!nombre || isNaN(precio)) {
+        alert('Por favor, completa todos los campos');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/productos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, precio })
+        });
+
+        const data = await res.json();
+        alert(data.mensaje || 'Producto agregado');
+        cargarProductos();
+      } catch (err) {
+        console.error('Error al agregar producto:', err);
+      }
+    }
+
+    async function eliminarProducto(id) {
+      if (!confirm('¿Estás seguro de eliminar este producto?')) return;
+
+      try {
+        const res = await fetch(`/api/productos/${id}`, {
+          method: 'DELETE'
+        });
+
+        const data = await res.json();
+        alert(data.mensaje || 'Producto eliminado');
+        cargarProductos();
+      } catch (err) {
+        console.error('Error al eliminar producto:', err);
+      }
+    }
+
+    function editarProducto(id, nombreActual, precioActual) {
+      const nuevoNombre = prompt('Nuevo nombre del producto:', nombreActual);
+      const nuevoPrecio = parseFloat(prompt('Nuevo precio del producto:', precioActual));
+
+      if (!nuevoNombre || isNaN(nuevoPrecio)) {
+        alert('Datos inválidos');
+        return;
+      }
+
+      fetch(`/api/productos/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre: nuevoNombre, precio: nuevoPrecio })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.mensaje || 'Producto actualizado');
+        cargarProductos();
+      })
+      .catch(err => {
+        console.error('Error al editar producto:', err);
+      });
+    }
+
+    window.onload = cargarProductos;
+  </script>
+</body>
+</html>

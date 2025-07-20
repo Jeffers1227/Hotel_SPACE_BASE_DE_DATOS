@@ -1,0 +1,272 @@
+        
+        html {
+        scroll-behavior: smooth;
+        }
+
+        
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #322620;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            color: white;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart {
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .usuario {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .usuario-nombre {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 25px;
+            right: 0;
+            background-color: white;
+            color: black;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .dropdown a:hover {
+            background-color: #eee;
+        }
+
+        .usuario:hover .dropdown {
+            display: block;
+        }
+
+        /* HERO */
+        .hero {
+            background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/139283761.jpg?k=c4c79375be030a538602a015b6de54829d2fe10e9117b5045a989ab7b0687beb&o=&hp=1');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        /* COMODIDADES */
+        .comodidades {
+            background-color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .comodidades h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .icon-list {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: nowrap;
+            margin-bottom: 20px;
+        }
+
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .icon-item i {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #322620;
+        }
+
+        /* CARRUSEL */
+        .carrusel {
+            width: 100%;
+            overflow: hidden;
+            background-color: #f8f8f8;
+            padding: 40px 0;
+        }
+
+        .carrusel-contenedor {
+            display: flex;
+            width: max-content;
+            animation: deslizar 30s linear infinite;
+        }
+
+        .carrusel-contenedor img {
+            width: 600px;
+            height: 350px;
+            object-fit: cover;
+            margin: 0 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        @keyframes deslizar {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .carrusel:hover .carrusel-contenedor {
+         animation-play-state: paused;
+        }
+
+
+
+        /* NOSOTROS */
+        .nosotros {
+        background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2); /* Fondo agradable */
+        padding: 80px 30px;
+        text-align: center;
+        color: #333;
+        }
+
+        .nosotros h2 {
+        font-size: 36px;
+        margin-bottom: 40px;
+        color: #2c3e50;
+        }
+
+        .nosotros-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: stretch;
+        flex-wrap: wrap;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        }
+
+        .nosotros-texto {
+        flex: 1;
+        background-color: #856b57;
+        color: white;
+        padding: 30px;
+        border-radius: 30px 0 30px 0;
+        font-size: 18px;
+        line-height: 1.6;
+        min-width: 300px;
+        max-width: 500px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .nosotros-imagen {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 300px;
+        }
+
+        .nosotros-imagen img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+
+
+        /* FOOTER */
+        footer {
+            background-color: #322620;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo img {
+            height: 60px;
+        }
+
+        .footer-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .footer-contact {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .footer-contact {
+                text-align: center;
+            }
+        }

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Hotel Space</title>
+    <link rel="stylesheet" href="css/bienvenido.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="img/logo_space.png" alt="Logo Hotel">
+        </div>
+        <nav>
+            <a href="bienvenido.html">Inicio</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="habitaciones.html">Habitaciones</a>
+            <a href="#">Productos</a>
+            <a href="comentarios.html">Recomendaciones</a>
+            <a href="#" id="adminPanel" style="display: none;">Admin</a>
+            <a href="http://localhost/Base_De_Datos/public/gestion_habitaciones.php">Gestionar Habitaciones</a>
+
+
+
+        </nav>
+        <div class="header-right">
+            <div class="cart">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="usuario">
+                <span id="usuarioNombre" class="usuario-nombre">Usuario</span>
+                <div class="dropdown">
+                    <a href="#" id="cerrarSesion">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Bienvenidos a Space</h1>
+        <p>Donde la comodidad se encuentra con elegancia</p>
+    </section>
+
+    <!-- COMODIDADES -->
+    <section class="comodidades">
+        <h2>Comodidades</h2>
+
+        <div class="icon-list fila-1">
+            <div class="icon-item"><i class="fas fa-tv"></i>Smart TV</div>
+            <div class="icon-item"><i class="fas fa-hot-tub"></i>Jacuzzi</div>
+            <div class="icon-item"><i class="fab fa-netflix"></i>Netflix</div>
+            <div class="icon-item"><i class="fab fa-youtube"></i>YouTube Premium</div>
+            <div class="icon-item"><i class="fas fa-wifi"></i>Wi-Fi</div>
+            <div class="icon-item"><i class="fas fa-car"></i>Estacionamiento</div>
+        </div>
+
+        <div class="icon-list fila-2">
+            <div class="icon-item"><i class="fas fa-tint"></i>Agua Caliente</div>
+            <div class="icon-item"><i class="fas fa-lightbulb"></i>Luces Psicodélicas</div>
+            <div class="icon-item"><i class="fas fa-couch"></i>Sillón Tántrico</div>
+            <div class="icon-item"><i class="fas fa-wine-bottle"></i>Frigobar</div>
+            <div class="icon-item"><i class="fas fa-mountain"></i>Vista Panorámica</div>
+        </div>
+    </section>
+
+        <!-- CARRUSEL DE IMÁGENES -->
+    <section class="carrusel">
+        <div class="carrusel-contenedor" id="slider">
+            <img src="img/cuarto1.png" alt="Imagen 1">
+            <img src="img/cuarto2.jpg" alt="Imagen 2">
+            <img src="img/cuarto4.webp" alt="Imagen 3">
+            <img src="img/cuarto5.jpg" alt="Imagen 4">
+            <img src="img/cuarto6.jpg" alt="Imagen 5">
+        </div>
+    </section>
+
+        <!-- NOSOTROS -->
+    <section id="nosotros" class="nosotros">
+        <h2>Sobre Nosotros</h2>
+        <div class="nosotros-content">
+            <div class="nosotros-texto">
+                <p>
+                    En <strong>Hotel Space</strong>, no solo ofrecemos habitaciones, creamos experiencias. 
+                    Somos un refugio de lujo y tecnología, donde cada detalle ha sido cuidadosamente diseñado 
+                    para ofrecerte el confort de la Tierra con la elegancia del espacio exterior. 
+                    Nuestro equipo está comprometido con la excelencia y la hospitalidad, 
+                    brindando un servicio galácticamente inolvidable.
+                </p>
+            </div>
+            <div class="nosotros-imagen">
+                <img src="https://www.educativo.net/xframework/files/entities/articulos/448/img.jpg" alt="Imagen sobre educación">
+        </div>
+    </div>
+    </section>
+
+
+
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">
+            <img src="img/logo_space.png" alt="Logo Footer">
+        </div>
+        <div class="footer-title">Hotel Space</div>
+        <div class="footer-contact">
+            <p>+51 977644045</p>
+            <p>UTP, Salón C0203, Santa Clara, Ate</p>
+        
+            <p>space.reservas@gmail.com</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT PARA MOSTRAR NOMBRE Y CERRAR SESIÓN -->
+    <script>
+        const usuario = JSON.parse(localStorage.getItem('usuario'));
+        const usuarioNombre = document.getElementById('usuarioNombre');
+        if (usuario) {
+            usuarioNombre.textContent = `${usuario.nombre} (${usuario.rol})`;
+
+            // Solo mostrar si es administrador
+        if (usuario.rol.toLowerCase() === 'admin') {
+        adminPanel.style.display = 'inline-block';
+        adminPanel.href = 'admin.html'; 
+        }
+        
+        } else {
+            usuarioNombre.textContent = "Invitado";
+        }
+
+        document.getElementById('cerrarSesion').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('usuario');
+            window.location.href = 'http://localhost:3000/login.html';
+        });
+
+        
+    </script>
+
+</body>
+</html>

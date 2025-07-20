@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+  <div class="contenedor-login">
+    <form id="formLogin" class="formulario">
+      <h2>🔐 Iniciar Sesión</h2>
+      <input type="email" name="correo" placeholder="Correo" required>
+      <input type="password" name="contraseña" placeholder="Contraseña" required>
+      <button type="submit">Ingresar</button>
+      <a href="registro.html">Registrarse</a>
+      <div id="mensaje"></div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('formLogin');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const datos = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+        });
+
+        const respuesta = await res.json();
+
+        if (res.ok) {
+          document.getElementById('mensaje').innerText = "✅ Bienvenido, " + respuesta.usuario.nombre;
+
+          localStorage.setItem('token', respuesta.token);
+          localStorage.setItem('usuario', JSON.stringify(respuesta.usuario));
+
+          setTimeout(() => window.location.href = '/bienvenido.html', 1500);
+        } else {
+          document.getElementById('mensaje').innerText = respuesta.mensaje || '❌ Error al iniciar sesión';
+        }
+
+      } catch (err) {
+        document.getElementById('mensaje').innerText = '❌ Error en el servidor';
+      }
+    });
+  </script>
+
+</body>
+</html>

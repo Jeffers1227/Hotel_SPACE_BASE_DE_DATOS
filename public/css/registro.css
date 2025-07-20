@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  background: linear-gradient(to right, #0a1527, #091020);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor {
+  display: flex;
+  width: 90%;
+  max-width: 1000px;
+  background-color: rgba(255, 255, 255, 0.08); /* transparencia */
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.imagen {
+  flex: 1;
+  background: url('../img/Space-hotel-building-logo-design-Graphics-64136138-1.jpg') no-repeat center center;
+  background-size: cover;
+  min-height: 400px;
+}
+
+.formulario {
+  flex: 1;
+  padding: 40px;
+  color: #fff;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+  color: #ffffff;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+input::placeholder {
+  color: #ddd;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+button {
+  background-color: #00A0FA;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0070c0;
+}
+
+#mensaje {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: #7CFC00;
+}
+
+.formulario a {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.formulario a:hover {
+  color: #000000;
+  text-decoration: underline;
+}

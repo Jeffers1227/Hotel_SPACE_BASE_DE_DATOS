@@ -1,0 +1,83 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f4f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.comentario-container {
+  background-color: #ffffff;
+  padding: 50px 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 500px; /* más grande */
+  text-align: left;
+}
+
+/* Título */
+.comentario-container h2 {
+  color: #00bfae;
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+.comentario-container .bienvenida {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+/* Labels */
+.comentario-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 15px;
+}
+
+/* Inputs y textarea */
+textarea,
+input[type="text"] {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.3s;
+}
+
+textarea:focus,
+input[type="text"]:focus {
+  border-color: #00bfae;
+}
+
+/* Botón */
+button {
+  width: 100%;
+  padding: 15px;
+  background-color: #00bfae;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #009e92;
+}
+
+/* Mensaje */
+#mensaje {
+  margin-top: 15px;
+  color: green;
+  font-weight: bold;
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Habitaciones - Hotel Sheraton</title>
+  <link rel="stylesheet" href="css/habitaciones.css" />
+  
+</head>
+
+<body>
+
+  <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <img src="img/logo_space.png" alt="Logo Hotel">
+        </div>
+        <nav>
+            <a href="bienvenido.html">Inicio</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#">Habitaciones</a>
+            <a href="#">Productos</a>
+            <a href="comentarios.html">Recomendaciones</a>
+        </nav>
+        <div class="header-right">
+            <div class="cart">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="usuario">
+                <span id="usuarioNombre" class="usuario-nombre">Usuario</span>
+                <div class="dropdown">
+                    <a href="#" id="cerrarSesion">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+  <main>
+    <h1 style="text-align: center; color: #333; margin-top: 40px;">Nuestras Habitaciones</h1>
+
+    <div class="habitaciones-container">
+      <!-- Habitación 1 -->
+      <div class="habitacion">
+        <img src="img/mini.suite.webp" alt="Mini Suite">
+        <h3>Mini Suite</h3>
+        <p>Un espacio íntimo y acogedor, perfecto para disfrutar de momentos únicos en un ambiente cómodo.</p>
+        <a href="habitaciones/mini-suite.html"><button>lo quiero</button></a>
+      </div>
+
+      <!-- Habitación 2 -->
+      <div class="habitacion">
+        <img src="img/suite.basica.webp" alt="Suite Básica">
+        <h3>Suite Básica</h3>
+        <p>Comodidad y funcionalidad se combinan para brindarte una experiencia sencilla y placentera.</p>
+        <a href="habitaciones/suite-basica.html"><button>lo quiero</button></a>
+      </div>
+
+      <!-- Habitación 3 -->
+      <div class="habitacion">
+        <img src="img/suite.junior.webp" alt="Suite Junior">
+        <h3>Suite Junior</h3>
+        <p>Ideal para quienes buscan un equilibrio entre elegancia y confort en un ambiente relajado.</p>
+        <a href="habitaciones/suite-junior.html"><button>lo quiero</button></a>
+      </div>
+
+      <!-- Habitación 4 -->
+      <div class="habitacion">
+        <img src="img/suite.panoramica.webp" alt="Suite Panorámica">
+        <h3>Suite Panorámica</h3>
+        <p>Disfruta de vistas impresionantes y una decoración moderna que eleva tu experiencia.</p>
+        <a href="habitaciones/suite-panoramica.html"><button>lo quiero</button></a>
+      </div>
+
+      <!-- Habitación 5 -->
+      <div class="habitacion">
+        <img src="img/suite.premiun.webp" alt="Suite Premium">
+        <h3>Suite Premium</h3>
+        <p>Lujo y sofisticación en cada detalle, para una estadía verdaderamente exclusiva y refinada.</p>
+        <a href="habitaciones/suite-premiun.html"><button>lo quiero</button></a>
+      </div>
+
+      <!-- Habitación 6 -->
+      <div class="habitacion">
+        <img src="img/suite.universitario.webp" alt="Suite Universitario">
+        <h3>Suite Universitario</h3>
+        <p>Espacio funcional y económico, ideal para viajeros jóvenes que no quieren renunciar a la calidad.</p>
+        <a href="habitaciones/suite-universitario.html"><button>lo quiero</button></a>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">
+            <img src="img/logo_space.png" alt="Logo Footer">
+        </div>
+        <div class="footer-title">Hotel Space</div>
+        <div class="footer-contact">
+            <p>+51 977644045</p>
+            <p>UTP, Salón C0403, Santa Clara, Ate</p>
+            <p>space.reservas@gmail.com</p>
+        </div>
+    </footer>
+    <!-- SCRIPT PARA MOSTRAR NOMBRE Y CERRAR SESIÓN -->
+    <script>
+        const usuario = JSON.parse(localStorage.getItem('usuario'));
+        const usuarioNombre = document.getElementById('usuarioNombre');
+        if (usuario) {
+            usuarioNombre.textContent = `${usuario.nombre} (${usuario.rol})`;
+        } else {
+            usuarioNombre.textContent = "Invitado";
+        }
+
+        document.getElementById('cerrarSesion').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('usuario');
+            window.location.href = 'http://localhost:3000/login.html';
+        });
+        
+    </script>
+
+
+</body>
+</html>
